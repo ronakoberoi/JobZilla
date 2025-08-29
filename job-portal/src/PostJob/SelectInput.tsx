@@ -1,16 +1,11 @@
-import { Combobox, InputBase, useCombobox } from '@mantine/core';
-import { useState } from 'react';
+import { Combobox, InputBase, ScrollAreaAutosize, useCombobox } from '@mantine/core';
+import { useEffect, useState } from 'react';
 
-const groceSeeries = [
-  '🍎 Apples',
-  '🍌 Bananas',
-  '🥦 Broccoli',
-  '🥕 Carrots',
-  '🍫 Chocolate',
-  '🍇 Grapes',
-];
 
-const SelectInput=()=> {
+const SelectInput=(props:any)=> {
+  useEffect(()=>{
+setData(props.options);
+  },[])
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
@@ -47,7 +42,8 @@ const SelectInput=()=> {
       }}
     >
       <Combobox.Target>
-        <InputBase
+        <InputBase withAsterisk className='[&_input]:font-medium'
+        label={props.label}
           rightSection={<Combobox.Chevron />}
           value={search}
           onChange={(event) => {
@@ -61,17 +57,19 @@ const SelectInput=()=> {
             combobox.closeDropdown();
             setSearch(value || '');
           }}
-          placeholder="Search value"
+          placeholder={props.placeholder}
           rightSectionPointerEvents="none"
         />
       </Combobox.Target>
 
       <Combobox.Dropdown>
         <Combobox.Options>
+           <ScrollAreaAutosize mah={200} type="scroll">
           {options}
           {!exactOptionMatch && search.trim().length > 0 && (
             <Combobox.Option value="$create">+ Create {search}</Combobox.Option>
           )}
+          </ScrollAreaAutosize>
         </Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>
