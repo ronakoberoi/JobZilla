@@ -14,7 +14,6 @@ const Talents = () => {
             talents.map((talent, index)=>
             <TalentCard key={index} {...talent} />)
         }
-        <TalentCard />
     </div>
   </div>
 }

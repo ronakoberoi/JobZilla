@@ -1,49 +1,120 @@
-import { RichTextEditor, Link } from '@mantine/tiptap';
+import { RichTextEditor } from '@mantine/tiptap';
 import { useEditor } from '@tiptap/react';
-import Highlight from '@tiptap/extension-highlight';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
-import TextAlign from '@tiptap/extension-text-align';
+import Highlight from '@tiptap/extension-highlight';
 import Superscript from '@tiptap/extension-superscript';
-import SubScript from '@tiptap/extension-subscript';
+import Subscript from '@tiptap/extension-subscript';
+import TextAlign from '@tiptap/extension-text-align';
+import Link from '@tiptap/extension-link';
+
+import {
+  IconBold,
+  IconItalic,
+  IconUnderline,
+  IconStrikethrough,
+  IconCode,
+} from '@tabler/icons-react';
+
 import { content } from '../Data/PostJob';
 
-const TextEditor=()=>{
-  const data=content; 
+const TextEditor: React.FC = () => {
   const editor = useEditor({
     extensions: [
       StarterKit,
       Underline,
-      Link,
-      Superscript,
-      SubScript,
       Highlight,
+      Superscript,
+      Subscript,
+      Link,
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
     ],
     content,
   });
+  
+  const hasStoredMark = (name: string) => {
+    try {
+      const stored =
+      (editor?.state as any)?.storedMarks ?? (editor?.view?.state as any)?.storedMarks;
+      if (!stored) return false;
+      return !!stored.some((m: any) => m?.type?.name === name);
+    } catch {
+      return false;
+    }
+  };
 
   return (
-    <RichTextEditor editor={editor}>
-      <RichTextEditor.Toolbar bg="mineShaft.10" sticky stickyOffset="var(--docs-header-height)">
-        <RichTextEditor.ControlsGroup>
-          <RichTextEditor.Bold />
-          <RichTextEditor.Italic />
-          <RichTextEditor.Underline />
-          <RichTextEditor.Strikethrough />
-          <RichTextEditor.ClearFormatting />
-          <RichTextEditor.Highlight />
-          <RichTextEditor.Code />
-        </RichTextEditor.ControlsGroup>
+    <RichTextEditor
+    className='mt-2'
+      editor={editor}
+      styles={{
+        content: {
+          backgroundColor: '#2E2E2E',
+          color: '#ffffff',
+        },
+        toolbar: {
+          backgroundColor: '#2E2E2E',
+        },
+        control: {
+          color: 'white',
+          '&[data-active="true"]': {
+            backgroundColor: '#27ae60',
+            color: '#fff',
+          },
+          '&:hover': {
+            backgroundColor: '#444',
+          },
+        },
+      }}
+    >
+      <RichTextEditor.Toolbar sticky stickyOffset="var(--docs-header-height)">
+        <RichTextEditor.Control
+          onClick={() => editor?.chain().focus().toggleBold().run()}
+          active={!!editor && (editor.isActive('bold') || hasStoredMark('bold'))}
+          aria-label="Bold"
+          title="Bold"
+        >
+          <IconBold size={16} />
+        </RichTextEditor.Control>
 
-        <RichTextEditor.ControlsGroup>
+        <RichTextEditor.Control
+          onClick={() => editor?.chain().focus().toggleItalic().run()}
+          active={!!editor && (editor.isActive('italic') || hasStoredMark('italic'))}
+          aria-label="Italic"
+          title="Italic"
+        >
+          <IconItalic size={16} />
+        </RichTextEditor.Control>
+
+        <RichTextEditor.Control
+          onClick={() => editor?.chain().focus().toggleUnderline().run()}
+          active={!!editor && (editor.isActive('underline') || hasStoredMark('underline'))}
+          aria-label="Underline"
+          title="Underline"
+        >
+          <IconUnderline size={16} />
+        </RichTextEditor.Control>
+
+        <RichTextEditor.Control
+          onClick={() => editor?.chain().focus().toggleStrike().run()}
+          active={!!editor && (editor.isActive('strike') || hasStoredMark('strike'))}
+          aria-label="Strikethrough"
+          title="Strikethrough"
+        >
+          <IconStrikethrough size={16} />
+        </RichTextEditor.Control>
+
+        <RichTextEditor.Control
+          onClick={() => editor?.chain().focus().toggleCode().run()}
+          active={!!editor && (editor.isActive('code') || hasStoredMark('code'))}
+          aria-label="Code"
+          title="Code"
+        >
+          <IconCode size={16} />
+        </RichTextEditor.Control>
+        <RichTextEditor.Highlight />
           <RichTextEditor.H4 />
-        </RichTextEditor.ControlsGroup>
-
         <RichTextEditor.ControlsGroup>
-          <RichTextEditor.Blockquote />
-          <RichTextEditor.Hr />
-          <RichTextEditor.BulletList />
           <RichTextEditor.OrderedList />
           <RichTextEditor.Subscript />
           <RichTextEditor.Superscript />
@@ -57,7 +128,6 @@ const TextEditor=()=>{
         <RichTextEditor.ControlsGroup>
           <RichTextEditor.AlignLeft />
           <RichTextEditor.AlignCenter />
-          <RichTextEditor.AlignJustify />
           <RichTextEditor.AlignRight />
         </RichTextEditor.ControlsGroup>
 
@@ -67,8 +137,9 @@ const TextEditor=()=>{
         </RichTextEditor.ControlsGroup>
       </RichTextEditor.Toolbar>
 
-      <RichTextEditor.Content bg="mineShaft.10"/>
+      <RichTextEditor.Content />
     </RichTextEditor>
   );
-}
+};
+
 export default TextEditor;
