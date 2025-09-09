@@ -1,4 +1,4 @@
-import Profile from "../Profile/Profile"
+import Profile from "../Components/Profile/Profile"
 
 const ProfilePage = () => {
   return <div className="min-h-[90vh] bg-mine-shaft-950 text-['poppins']">
