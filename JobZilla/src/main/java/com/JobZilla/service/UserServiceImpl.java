@@ -1,11 +1,13 @@
 package com.JobZilla.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -88,6 +90,16 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(passwordEncoder.encode(loginDTO.getPassword()));
 		userRepository.save(user);
 		return new ResponseDTO("Password Changed Successfully..");
+	}
+
+	@Scheduled(fixedRate = 60000)
+	public void removeExpiredOTPs() {
+		LocalDateTime expiry=LocalDateTime.now().minusMinutes(5);
+		List<OTP>expiredOTPs=otpRepository.findByCreationTimeBefore(expiry);
+		if(!expiredOTPs.isEmpty()){
+			otpRepository.deleteAll(expiredOTPs);
+			System.out.println("Removed "+expiredOTPs.size()+" expired OTPs.");
+		}
 	}
 }
 
