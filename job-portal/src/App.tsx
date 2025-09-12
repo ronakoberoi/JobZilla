@@ -5,24 +5,11 @@ import '@mantine/carousel/styles.css'
 import '@mantine/tiptap/styles.css';
 import '@mantine/dates/styles.css';
 import '@mantine/notifications/styles.css';
-import HomePage from './Pages/HomePage';
 import { createTheme } from '@mantine/core';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import FindJobsPage from './Pages/FindJobsPage';
-import Header from './Components/Header/Header';
-import Footer from './Components/Footer/Footer';
-import ScrollToTop from './ScrollToTop';
-import FindTalentPage from './Pages/FindTalenPaget';
-import TalentProfilePage from './Pages/TalentProfilePage';
-import PostJobPage from './Pages/PostJobPage';
-import JobDescPage from './Pages/JobDescPage';
-import ApplyJobPage from './Pages/ApplyJobPage';
-import CompanyPage from './Pages/CompanyPage';
-import PostedJobPage from './Pages/PostedJobPage';
-import JobHistoryPage from './Pages/JobHistoryPage';
-import SignUpPage from './Pages/SignUpPage';
-import ProfilePage from './Pages/ProfilePage';
 import { Notifications } from '@mantine/notifications';
+import { Provider } from 'react-redux';
+import Store from './Store';
+import AppRoutes from './Pages/appRoutes'
 
 function App() {
   const theme = createTheme({
@@ -40,32 +27,12 @@ function App() {
     },
   })
   return (
+    <Provider store={Store}>
     <MantineProvider defaultColorScheme='dark' theme={theme}>
       <Notifications position="top-center" zIndex={1000}/>
-      <BrowserRouter>
-      <div className='relative'>
-      <ScrollToTop />
-      <Header />
-      <Divider size="xs" mx="md" />
-      <Routes>
-        <Route path='/find-jobs' element={<FindJobsPage />} />
-        <Route path='/find-talent' element={<FindTalentPage />} />
-        <Route path='/jobs' element={<JobDescPage />} />
-        <Route path="/apply-job" element={<ApplyJobPage />} />
-        <Route path='/post-job' element={<PostJobPage />} />
-        <Route path='/posted-job' element={<PostedJobPage />} />
-        <Route path='/job-history' element={<JobHistoryPage />} />
-        <Route path='/company' element={<CompanyPage />} />
-        <Route path='/signup' element={<SignUpPage />} />
-        <Route path='/profile' element={<ProfilePage />} />
-        <Route path='/login' element={<SignUpPage />} />
-        <Route path='/talent-profile' element={<TalentProfilePage />} />
-        <Route path='*' element={<HomePage />} />
-      </Routes>
-      <Footer />
-      </div>
-      </BrowserRouter>
+      <AppRoutes />
     </MantineProvider>
+    </Provider>
   );
 }
 

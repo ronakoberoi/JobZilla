@@ -1,9 +1,9 @@
 import { IconBriefcase, IconMapPin, IconPremiumRights, IconRecharging } from "@tabler/icons-react"
 
 const card=[
-    {name:"Location", icon:IconMapPin, value:"New York"},
+    {name:"Location", icon:IconMapPin, value:"Banglore"},
     {name:"Experience", icon:IconBriefcase, value:"Expert"},
-    {name:"Salary", icon:IconPremiumRights, value:"48 LPA"},
+    {name:"Salary", icon:IconPremiumRights, value:"28 LPA"},
     {name:"Job Type", icon:IconRecharging, value:"Full Time"},
 ]
 const skills=['React', 'Spring Boot', 'Java', 'Python', 'Node.js', 'MongoDB', 'Express', 'Django', 'PostgreSQL']
