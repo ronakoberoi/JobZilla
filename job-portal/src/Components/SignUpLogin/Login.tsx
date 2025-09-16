@@ -42,6 +42,7 @@ const Login = () => {
         title: "Login Successfull",
         message: "Redirecting to Home Page....",
         withCloseButton: true,
+        autoClose: 3000,
         icon:<IconCheck style={{width: "90%", height: "90%" }}/>,
         color:"teal",
         withBorder:true,
@@ -58,6 +59,7 @@ const Login = () => {
       notifications.show({
         title: "Login Failed!",
         message: err.response.data.errorMessage,
+        autoClose: 3000,
         withCloseButton: true,
         icon:<IconX style={{width: "90%", height: "90%" }}/>,
         color:"red",
@@ -73,7 +75,7 @@ const Login = () => {
   overlayProps={{ radius: 'sm', blur: 2 }}
   loaderProps={{ color: 'brightSun.4', type: 'bars' }} />
   <div className="w-1/2 px-20 flex flex-col justify-center gap-3">
-    <div className="text-2xl font-semibold">Create Account</div>
+    <div className="text-2xl font-semibold">Login</div>
     <TextInput error={formError.email} value={data.email} name="email" onChange={handleChange} withAsterisk leftSection={<IconAt style={{ width: rem(16), height: rem(16) }} />} label="Email" placeholder="Your Email" />
     <PasswordInput error={formError.password} value={data.password} name="password" onChange={handleChange} withAsterisk leftSection={<IconAt style={{ width: rem(18), height: rem(18) }} stroke={1.5} />} label="Your Password" placeholder="Enter Password" />
     <Button loading={loading} onClick={handleSubmit} autoContrast variant="filled">Login</Button>

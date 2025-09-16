@@ -39,13 +39,13 @@ const ProfileMenu=()=> {
           Profile
         </Menu.Item>
         </Link>
-        <Menu.Item leftSection={<IconMessageCircle size={14} />}>
+        {/* <Menu.Item leftSection={<IconMessageCircle size={14} />}>
           Messages
         </Menu.Item>
         <Menu.Item leftSection={<IconFileText size={14} />}>
           Resume
-        </Menu.Item>
-        <Menu.Item
+        </Menu.Item> */}
+        {/* <Menu.Item
           leftSection={<IconMoon size={14} />}
           rightSection={
             <Switch 
@@ -56,7 +56,7 @@ const ProfileMenu=()=> {
           }
         >
         Dark Mode
-        </Menu.Item>
+        </Menu.Item> */}
         <Menu.Divider />
         <Menu.Item onClick={handleLogout}
           color="red"

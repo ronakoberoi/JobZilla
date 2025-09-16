@@ -80,11 +80,11 @@ const ResetPassword=(props:any)=>{
             {otpSent && !verified &&
                 <div className="flex gap-2">
                     <Button fullWidth loading={otpSending} color="brightSun.4" onClick={resendOtp} autoContrast variant="light">{resendLoader?seconds:"Resend" }</Button>
-                    <Button fullWidth loading={otpSending} onClick={changeEmail} autoContrast variant="filled">change Email</Button>
+                    <Button fullWidth loading={otpSending} onClick={changeEmail} autoContrast variant="filled">Change Email</Button>
                 </div>
             }
             {verified && <PasswordInput error={passErr} value={password} name="password" onChange={(e)=>{setPassword(e.target.value); setPassErr(signupValidation("password",e.target.value))}} withAsterisk leftSection={<IconLock size={16} />} label="Your Password" placeholder="Enter Password" />}
-            {verified && <Button onClick={handleResetPassword} autoContrast variant="filled">change Password</Button>}
+            {verified && <Button onClick={handleResetPassword} autoContrast variant="filled">Change Password</Button>}
         </div>
     </Modal>
 }

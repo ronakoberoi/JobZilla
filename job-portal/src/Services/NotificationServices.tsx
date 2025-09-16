@@ -8,6 +8,7 @@ const successNotification = (title:string, message:string)=>{
         withCloseButton: true,
         icon:<IconCheck style={{width: "90%", height: "90%" }}/>,
         color:"teal",
+        autoClose: 3000,
         withBorder:true,
         className:"!border-green-500"
     })
@@ -18,9 +19,10 @@ const errorNotification=(title:string, message:string)=>{
         message: message,
         withCloseButton: true,
         icon:<IconX style={{width: "90%", height: "90%" }}/>,
-        color:"teal",
+        color:"red",
+        autoClose: 3000,
         withBorder:true,
-        className:"!border-green-500"
+        className:"!border-red-500"
     })
 }
 export {successNotification, errorNotification};
