@@ -24,52 +24,56 @@ import com.JobZilla.utility.Utilities;
 
 import jakarta.mail.internet.MimeMessage;
 
-
-@Service(value="userService")
+@Service(value = "userService")
 public class UserServiceImpl implements UserService {
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private OTPRepository otpRepository;
-	
+
+	@Autowired
+	private ProfileService profileService;
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	private JavaMailSender mailSender;
 
 	@Override
 	public UserDTO registerUser(UserDTO userDTO) throws JobZillaException {
 		Optional<User> optional = userRepository.findByEmail(userDTO.getEmail());
-		if(optional.isPresent())throw new JobZillaException("USER_FOUND");
+		if (optional.isPresent())
+			throw new JobZillaException("USER_FOUND");
+		userDTO.setProfileID(profileService.createProfile(userDTO.getEmail()));
 		userDTO.setId(Utilities.getNextSequence("users"));
 		userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-		User user= userDTO.toEntity();
-		user=userRepository.save(user);
+		User user = userDTO.toEntity();
+		user = userRepository.save(user);
 		return user.toDTO();
 	}
 
 	@Override
 	public UserDTO loginUser(LoginDTO loginDTO) throws JobZillaException {
-		User user=userRepository.findByEmail(loginDTO.getEmail()).orElseThrow(()-> new 
-		JobZillaException("USER_NOT_FOUND"));
-		if(!passwordEncoder.matches(loginDTO.getPassword(), user.getPassword()))throw new
-		JobZillaException("INVALID_CREDENTIALS");
+		User user = userRepository.findByEmail(loginDTO.getEmail())
+				.orElseThrow(() -> new JobZillaException("USER_NOT_FOUND"));
+		if (!passwordEncoder.matches(loginDTO.getPassword(), user.getPassword()))
+			throw new JobZillaException("INVALID_CREDENTIALS");
 		return user.toDTO();
 	}
 
 	@Override
 	public Boolean sendOtp(String email) throws Exception {
-		User user=userRepository.findByEmail(email).orElseThrow(()-> new 
+		User user=userRepository.findByEmail(email).orElseThrow(() -> new 
 		JobZillaException("USER_NOT_FOUND"));
 		MimeMessage mm = mailSender.createMimeMessage();
-		MimeMessageHelper message=new MimeMessageHelper(mm, true);
+		MimeMessageHelper message = new MimeMessageHelper(mm, true);
 		message.setTo(email);
 		message.setSubject("Your OTP Code");
-		String genOtp=Utilities.generateOTP();
-		OTP otp=new OTP(email, genOtp, LocalDateTime.now());
+		String genOtp = Utilities.generateOTP();
+		OTP otp = new OTP(email, genOtp, LocalDateTime.now());
 		otpRepository.save(otp);
 		message.setText(Data.getMessageBody(genOtp, user.getName()),true);
 		mailSender.send(mm);
@@ -78,14 +82,15 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Boolean verifyOtp(String email, String otp) throws JobZillaException {
-		OTP otpEntity=otpRepository.findById(email).orElseThrow(()->new JobZillaException("OTP_NOT_FOUND"));
-		if(!otpEntity.getOtpCode().equals(otp))throw new JobZillaException("OTP_INCORRECT");
+		OTP otpEntity = otpRepository.findById(email).orElseThrow(() -> new JobZillaException("OTP_NOT_FOUND"));
+		if (!otpEntity.getOtpCode().equals(otp))
+			throw new JobZillaException("OTP_INCORRECT");
 		return true;
 	}
 
 	@Override
 	public ResponseDTO changePassword(LoginDTO loginDTO) throws JobZillaException {
-		User user=userRepository.findByEmail(loginDTO.getEmail()).orElseThrow(()-> new 
+		User user=userRepository.findByEmail(loginDTO.getEmail()).orElseThrow(()-> new
 		JobZillaException("USER_NOT_FOUND"));
 		user.setPassword(passwordEncoder.encode(loginDTO.getPassword()));
 		userRepository.save(user);

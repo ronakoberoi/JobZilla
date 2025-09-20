@@ -14,19 +14,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
-	
+
 	private Long id;
-	@NotBlank(message="{user.name.absent}")
+	@NotBlank(message = "{user.name.absent}")
 	private String name;
-	@NotBlank(message="{user.email.absent}")
-	@Email(message="{user.email.invalid}")
+	@NotBlank(message = "{user.email.absent}")
+	@Email(message = "{user.email.invalid}")
 	private String email;
-	@NotBlank(message="{user.password.absent}")
+	@NotBlank(message = "{user.password.absent}")
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#._!%*?&])[A-Za-z\\d@#._$!%*?&]{8,}$", message = "Password must be at least contains 8 characters and must contain special character and digit.")
 	private String password;
 	private AccountType accountType;
-	
+	private Long profileID;
+
 	public User toEntity() {
-		return new User(this.id, this.name, this.email, this.password, this.accountType);
+		return new User(this.id, this.name, this.email, this.password, this.accountType, this.profileID);
 	}
 }

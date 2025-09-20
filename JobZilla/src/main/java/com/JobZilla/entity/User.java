@@ -14,17 +14,18 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection="users")
+@Document(collection = "users")
 public class User {
 	@Id
 	private Long id;
 	private String name;
-	@Indexed(unique=true)
+	@Indexed(unique = true)
 	private String email;
 	private String password;
 	private AccountType accountType;
-	
+	private Long profileID;
+
 	public UserDTO toDTO() {
-		return new UserDTO(this.id, this.name, this.email, this.password, this.accountType);
+		return new UserDTO(this.id, this.name, this.email, this.password, this.accountType, this.profileID);
 	}
 }

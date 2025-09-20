@@ -53,7 +53,7 @@ public class UserAPI {
 	}
 	@GetMapping("/verifyOtp/{email}/{otp}")
 	public ResponseEntity<ResponseDTO>verifyOtp(@PathVariable @Email(message="{user.email.invalid}") String email, @PathVariable
-			@Pattern(regexp="^[0-9]{6}$", message="{otp.invalid}") String otp) throws JobZillaException {
+		@Pattern(regexp="^[0-9]{6}$", message="{otp.invalid}") String otp) throws JobZillaException {
 		userService.verifyOtp(email, otp);
 		return new ResponseEntity<>(new ResponseDTO("OTP Verified Successfully"), HttpStatus.OK);
 	}
