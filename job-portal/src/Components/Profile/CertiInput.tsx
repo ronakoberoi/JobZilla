@@ -18,7 +18,7 @@ const CertiInput = (props:any) => {
     onChange={setIssueDate} />
     </div>
     <div className="flex gap-5">
-        <Button onClick={()=>props.setEdit(false)} color="brightSun.4" variant="outline">Save</Button>
+        <Button onClick={()=>props.setEdit(false)} color="green.8" variant="light">Save</Button>
         <Button color="red.8" onClick={()=>props.setEdit(false)} variant="light">Cancel</Button>
     </div>
   </div>
