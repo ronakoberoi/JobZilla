@@ -1,8 +1,20 @@
 import { ActionIcon } from "@mantine/core"
 import { IconTrash } from "@tabler/icons-react"
 import { formatDate } from "../../Services/Utilities"
+import { useDispatch, useSelector } from "react-redux"
+import { changeProfile } from "../../Slices/ProfileSlice"
+import { successNotification } from "../../Services/NotificationServices"
 
 const CertiCard = (props:any) => {
+    const dispatch=useDispatch();
+    const profile=useSelector((state:any)=>state.profile);
+    const handleDelete=()=>{
+        let certis=[...profile.certifications];
+        certis.splice(props.index, 1);
+        let updatedProfile={...profile, certifications:certis};
+        dispatch(changeProfile(updatedProfile));
+        successNotification("Success", "Certificate Deleted Successfully");
+    }
   return <div className="flex justify-between">
         <div className="flex gap-2 items-center">
             <div className="p-2 bg-mine-shaft-800 rounded-md">
@@ -18,7 +30,7 @@ const CertiCard = (props:any) => {
             <div className="text-sm text-mine-shaft-300">{formatDate(props.issueDate)}</div>
             <div className="text-sm text-mine-shaft-300">{props.certificateId}</div>
         </div>
-        {props.edit&&<ActionIcon size="lg" color="red.8" variant="subtle">
+        {props.edit&&<ActionIcon onClick={handleDelete} size="lg" color="red.8" variant="subtle">
         <IconTrash stroke={1.5} className="h-4/5 w-4/5" />
         </ActionIcon>}
         </div>
