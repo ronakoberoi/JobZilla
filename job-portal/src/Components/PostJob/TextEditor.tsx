@@ -18,7 +18,7 @@ import {
 
 import { content } from '../../Data/PostJob';
 
-const TextEditor: React.FC = () => {
+const TextEditor=(props:any) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -29,7 +29,10 @@ const TextEditor: React.FC = () => {
       Link,
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
     ],
-    content,
+    content:props.form.getValues().description,
+    onUpdate({editor}){
+      props.form.setFieldValue('description',editor.getHTML());
+    }
   });
   
   const hasStoredMark = (name: string) => {
