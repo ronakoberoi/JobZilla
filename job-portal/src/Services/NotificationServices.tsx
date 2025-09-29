@@ -15,7 +15,7 @@ const successNotification = (title:string, message:string)=>{
 }
 const errorNotification=(title:string, message:string)=>{
     notifications.show({
-        title: "Login Failed",
+        title: title,
         message: message,
         withCloseButton: true,
         icon:<IconX style={{width: "90%", height: "90%" }}/>,

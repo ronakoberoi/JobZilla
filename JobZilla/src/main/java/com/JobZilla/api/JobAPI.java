@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.JobZilla.dto.ApplicantDTO;
+import com.JobZilla.dto.Application;
 import com.JobZilla.dto.JobDTO;
-import com.JobZilla.dto.ProfileDTO;
-import com.JobZilla.entity.Job;
+import com.JobZilla.dto.ResponseDTO;
 import com.JobZilla.exception.JobZillaException;
 import com.JobZilla.service.JobService;
 
@@ -42,5 +43,19 @@ public class JobAPI {
     @GetMapping("/get/{id}")
     public ResponseEntity<JobDTO>getJob(@PathVariable Long id) throws JobZillaException{
         return new ResponseEntity<>(jobService.getJob(id),HttpStatus.OK);
+    }
+    @PostMapping("/apply/{id}")
+    public ResponseEntity<ResponseDTO>applyJob(@PathVariable Long id, @RequestBody ApplicantDTO applicantDTO) throws JobZillaException {
+        jobService.applyJob(id, applicantDTO);
+        return new ResponseEntity<>(new ResponseDTO("Applied Successfully"), HttpStatus.OK);
+    }
+    @GetMapping("/postedBy/{id}")
+    public ResponseEntity<List<JobDTO>>getJobsPostedBy(@PathVariable Long id) throws JobZillaException{
+        return new ResponseEntity<>(jobService.getJobsPostedBy(id),HttpStatus.OK);
+    }
+    @PostMapping("/changeAppStatus")
+    public ResponseEntity<ResponseDTO>chnageAppStatus(@RequestBody Application application) throws JobZillaException {
+        jobService.changeAppStatus(application);
+        return new ResponseEntity<>(new ResponseDTO("Application Status Changed Successfully"), HttpStatus.OK);
     }
 }
