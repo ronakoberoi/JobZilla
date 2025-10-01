@@ -6,7 +6,7 @@ import com.JobZilla.dto.ProfileDTO;
 import com.JobZilla.exception.JobZillaException;
 
 public interface ProfileService {
-    public Long createProfile(String email) throws JobZillaException;
+    public Long createProfile(String email, String name) throws JobZillaException;
 
     public ProfileDTO getProfile(Long id) throws JobZillaException;
 
