@@ -6,12 +6,15 @@ import { IconArrowLeft, IconX } from "@tabler/icons-react";
 import { isNotEmpty, useForm } from "@mantine/form";
 import Experience from "../Profile/Experience";
 import { errorNotification, successNotification } from "../../Services/NotificationServices";
-import { postJob } from "../../Services/JobService";
+import { getJob, postJob } from "../../Services/JobService";
 import { notifications } from "@mantine/notifications";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 const PostJob = () => {
+  const {id} = useParams();
+  const [editorData, setEditorData]=useState(content);
   const user=useSelector((state:any)=>state.user);
   const navigate=useNavigate();
   const select=fields;
@@ -44,7 +47,7 @@ const PostJob = () => {
   const handlePost=()=>{
     form.validate();
     if(!form.isValid()) return;
-    postJob({...form.getValues(), postedBy:user.id, jobStatus:"ACTIVE"}).then((res)=>{
+    postJob({...form.getValues(), id, postedBy:user.id, jobStatus:"ACTIVE"}).then((res)=>{
       successNotification("Success","Job Posted Successfully");
       navigate(`/posted-jobs/${res.id}`);
     }).catch((err)=>{
@@ -53,7 +56,7 @@ const PostJob = () => {
     })
   }
   const handleDraft=()=>{
-    postJob({...form.getValues(), postedBy:user.id, jobStatus:"DRAFT"}).then((res)=>{
+    postJob({...form.getValues(),id, postedBy:user.id, jobStatus:"DRAFT"}).then((res)=>{
       successNotification("Success","Job Drafted Successfully");
       navigate(`/posted-jobs/${res.id}`);
     }).catch((err)=>{
@@ -61,6 +64,21 @@ const PostJob = () => {
       errorNotification("Error", err.response.data.errorMessage);
     })
   }
+  useEffect(()=>{
+    window.scrollTo(0,0);
+    if(id!=="0"){
+      getJob(id).then((res)=>{
+        form.setValues(res);
+        setEditorData(res.description);
+      }).catch((err)=>{
+        console.log(err);
+      })
+    }
+    else {
+      form.reset();
+      setEditorData(content);
+    }
+  }, [id])
   return <div className="w-4/5 mx-auto">
     <div className="text-2xl font-semibold mb-5">Post A Job</div>
     <div className="flex flex-col gap-5">
@@ -81,7 +99,7 @@ const PostJob = () => {
      <div>
       <div className="text-sm font-medium">Job Description<span className="text-red-500">*</span>
       </div>
-      <TextEditor form={form} />
+      <TextEditor form={form} data={editorData} />
      </div>
      <div className="flex gap-4">
       <Button color="brightSun.4" onClick={handlePost} variant="light">Publish Job</Button>

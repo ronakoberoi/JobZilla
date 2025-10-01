@@ -7,17 +7,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProfile } from "../../Services/ProfilesService";
 import { setProfile } from "../../Slices/ProfileSlice";
+import NotiMenu from "./NotiMenu";
 
 const Header =() => {
     const dispatch = useDispatch();
     const profile = useSelector((state:any)=>state.profile)
-    useEffect(()=> {
-        getProfile(user.id).then((data:any)=>{
-            dispatch(setProfile(data));
-        }).catch((error:any)=>{
-        console.log(error);});
-    }, [])
-    const user=useSelector((state:any)=>state.user)
+    const user = useSelector((state:any)=>state.user)
+    useEffect(() => {
+  if (user?.id) {
+    getProfile(user.id)
+      .then((data: any) => dispatch(setProfile(data)))
+      .catch((error: any) => console.log(error));
+  }
+}, [user]);
     const location = useLocation();
     return location.pathname!="/signup" && location.pathname!="/login" ? <div className="w-full font-['poppins'] bg-mine-shaft-950 px-6 text-white h-20 flex justify-between items-center">
         <Link to="/" className="flex gap-2 items-center text-bright-sun-400">
@@ -32,11 +34,7 @@ const Header =() => {
             {/* <div className="bg-mine-shaft-900 p-1.5 rounded-full">
             <IconSettings stroke={1.5} />
             </div> */}
-            <div className="bg-mine-shaft-900 p-1.5 rounded-full">
-            <Indicator color="brightSun.4" size={8} offset={6} processing>
-            <IconBell stroke={1.5} />
-            </Indicator>
-            </div>
+            {user?<NotiMenu />:<></>}
         </div>
     </div>:<></>
 }

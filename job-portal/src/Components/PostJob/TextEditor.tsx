@@ -17,8 +17,12 @@ import {
 } from '@tabler/icons-react';
 
 import { content } from '../../Data/PostJob';
+import { useEffect } from 'react';
 
 const TextEditor=(props:any) => {
+  useEffect(()=>{
+    editor?.commands.setContent(props.data);
+  }, [props.data])
   const editor = useEditor({
     extensions: [
       StarterKit,

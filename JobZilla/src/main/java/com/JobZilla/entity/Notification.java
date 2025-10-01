@@ -1,0 +1,30 @@
+package com.JobZilla.entity;
+
+import java.time.LocalDateTime;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.JobZilla.dto.NotificationDTO;
+import com.JobZilla.dto.NotificationStatus;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Document(collection="notifications")
+public class Notification {
+    private Long id;
+    private Long userId;
+    private String message;
+    private String action;
+    private String route;
+    private NotificationStatus status;
+    private LocalDateTime timestamp;
+
+    public NotificationDTO toDTO(){
+        return new NotificationDTO(this.id, this.userId, this.message, this.action, this.route, this.status, this.timestamp);
+    }
+}

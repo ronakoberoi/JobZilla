@@ -1,7 +1,11 @@
 import { Checkbox, CheckIcon, Combobox, Group, Input, Pill, PillsInput, useCombobox } from '@mantine/core';
 import { IconSearch, IconSelector } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateFilter } from '../../Slices/FilterSlice';
+
 const MultiInput=(props:any)=> {
+  const dispatch = useDispatch();
   useEffect(()=>{
     setData(props.options);
   }, [])
@@ -13,7 +17,6 @@ const MultiInput=(props:any)=> {
   const [search, setSearch] = useState('');
   const [data, setData] = useState<string[]>([]);
   const [value, setValue] = useState<string[]>([]);
-
   const exactOptionMatch = data.some((item) => item === search);
 
   const handleValueSelect = (val: string) => {
@@ -22,15 +25,18 @@ const MultiInput=(props:any)=> {
     if (val === '$create') {
       setData((current) => [...current, search]);
       setValue((current) => [...current, search]);
+      dispatch(updateFilter({ [props.title]: [...value, search] }));
     } else {
+      dispatch(updateFilter({ [props.title]:value.includes(val) ? value.filter((v) => v !== val) : [...value, val] }));
       setValue((current) =>
-        current.includes(val) ? current.filter((v) => v !== val) : [...current, val]
-      );
-    }
+      current.includes(val) ? current.filter((v) => v !== val) : [...current, val]
+    )}
   };
 
-  const handleValueRemove = (val: string) =>
+  const handleValueRemove = (val: string) =>{
     setValue((current) => current.filter((v) => v !== val));
+    dispatch(updateFilter({ [props.title]: value.filter((v) => v !== val) }));
+  }
 
   const values = value
     .slice(0,1)

@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.JobZilla.dto.LoginDTO;
+import com.JobZilla.dto.NotificationDTO;
 import com.JobZilla.dto.ResponseDTO;
 import com.JobZilla.dto.UserDTO;
 import com.JobZilla.entity.OTP;
@@ -41,6 +42,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private JavaMailSender mailSender;
+
+	@Autowired
+	private NotificationService notificationService;
 
 	@Override
 	public UserDTO registerUser(UserDTO userDTO) throws JobZillaException {
@@ -94,6 +98,11 @@ public class UserServiceImpl implements UserService {
 		JobZillaException("USER_NOT_FOUND"));
 		user.setPassword(passwordEncoder.encode(loginDTO.getPassword()));
 		userRepository.save(user);
+		NotificationDTO noti = new NotificationDTO();
+		noti.setUserId(user.getId());
+		noti.setMessage("Password Changed Successfully...");
+		noti.setAction("Passowrd Change");
+		notificationService.sendNotification(noti);
 		return new ResponseDTO("Password Changed Successfully..");
 	}
 
@@ -107,6 +116,3 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 }
-
-
-

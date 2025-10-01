@@ -1,5 +1,7 @@
 package com.JobZilla.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +30,13 @@ public class ProfileAPI {
     public ResponseEntity<ProfileDTO>getProfile(@PathVariable Long id) throws JobZillaException{
         return new ResponseEntity<>(profileService.getProfile(id),HttpStatus.OK);
     }
+    @GetMapping("/getAll")
+    public ResponseEntity<List<ProfileDTO>>getAllProfiles() throws JobZillaException{
+        return new ResponseEntity<>(profileService.getAllProfiles(),HttpStatus.OK);
+    }
     @PutMapping("/update")
     public ResponseEntity<ProfileDTO>updateProfile(@RequestBody ProfileDTO profileDTO) throws JobZillaException{
         return new ResponseEntity<>(profileService.updateProfile(profileDTO),HttpStatus.OK);
     }
+    
 }
