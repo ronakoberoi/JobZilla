@@ -64,7 +64,7 @@ const TalentCard = (props:any) => {
               <div className="text-sm text-mine-shaft-300">{profile?.jobTitle} • {profile?.company}</div>
             </div>
           </div>
-          <IconHeart stroke={1.5} className="text-mine-shaft-300 cursor-pointer" />
+          {/* <IconHeart stroke={1.5} className="text-mine-shaft-300 cursor-pointer" /> */}
         </div>
 
         <div className="flex gap-2">
@@ -98,17 +98,22 @@ const TalentCard = (props:any) => {
         {
             !props.invited &&<>
             <Link to={`/talent-profile/${profile?.id}`}>
-            <Button fullWidth color="brightSun.4" variant="outline">Profile</Button>
+            <Button fullWidth color="brightSun.4" className="left-20 font-semibold" variant="outline">Profile</Button>
           </Link>
           <div>
-            {props.posted ? (
-              <Button onClick={open} rightSection={<IconCalendarMonth className="w-5 h-5" />} color="brightSun.4" variant="light" fullWidth>
-                Schedule
-              </Button>
-            ) : (
-              <Button fullWidth color="brightSun.4" variant="light">Message</Button>
-            )}
-          </div>
+  {props.posted && (
+    <Button
+      onClick={open}
+      rightSection={<IconCalendarMonth className="w-5 h-5" />}
+      color="brightSun.4"
+      variant="light"
+      fullWidth
+    >
+      Schedule
+    </Button>
+  )}
+</div>
+
             </>
         }
         {

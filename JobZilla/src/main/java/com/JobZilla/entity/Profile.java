@@ -1,7 +1,9 @@
 package com.JobZilla.entity;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
 import com.JobZilla.dto.ProfileDTO;
 import com.JobZilla.dto.Certification;
@@ -31,10 +33,13 @@ public class Profile {
     private List<Experience>experience;
     private List<Certification>certifications;
     private List<Long>savedJobs;
+    private List<Map<String,Object>> acceptedJobs = new ArrayList<>();
+    private List<Map<String,Object>> rejectedJobs = new ArrayList<>();
+
 
     public ProfileDTO toDTO(){
         return new ProfileDTO(this.id,this.name, this.email, this.jobTitle, this.company, this.location, this.about, 
         this.picture!=null?Base64.getEncoder().encodeToString(this.picture):null, this.totalExp,
-        this.skills, this.experience, this.certifications, this.savedJobs);
+        this.skills, this.experience, this.certifications, this.savedJobs, this.acceptedJobs, this.rejectedJobs);
     }
 }

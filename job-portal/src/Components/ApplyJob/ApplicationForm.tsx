@@ -40,16 +40,17 @@ const ApplicationForm = () => {
         name: '',
         email: '',
         phone: '',
-        website: '',
+        cgpa: '',
         resume: '',
-        coverLetter: ''
+        Introduction: ''
     },
     validate:{
         name: isNotEmpty('Name is required'),
         email: isNotEmpty('Email is required'),
         phone: isNotEmpty('Phone Number is required'),
-        website: isNotEmpty('Website is required'),
+        cgpa: isNotEmpty('CGPA is required'),
         resume: isNotEmpty('Resume is required'),
+        Introduction: isNotEmpty('Introduction is required'),
     }
     });
   return <div>
@@ -67,12 +68,12 @@ const ApplicationForm = () => {
         </div>
         <div className="flex gap-10 [&>*]w-1/2">
         <NumberInput {...form.getInputProps("phone")} readOnly={preview} variant={preview?"unstyled":"default"} className={`${preview?"text-mine-shaft-300 font-semibold":""}`} withAsterisk label="Phone Number" placeholder="Enter Phone Number" hideControls min={0} max={9999999999} clampBehavior="strict"/>
-        <TextInput {...form.getInputProps("website")} readOnly={preview} variant={preview?"unstyled":"default"} className={`${preview?"text-mine-shaft-300 font-semibold":""}`} withAsterisk label="Personal Website" placeholder="Enter URL" />
+        <TextInput {...form.getInputProps("cgpa")} readOnly={preview} variant={preview?"unstyled":"default"} className={`${preview?"text-mine-shaft-300 font-semibold":""}`} withAsterisk label="CGPA" placeholder="Enter CGPA" />
         </div>
         <FileInput {...form.getInputProps("resume")} accept="application/pdf" readOnly={preview} variant={preview?"unstyled":"default"} className={`${preview?"text-mine-shaft-300 font-semibold":""}`} withAsterisk
         leftSection={<IconPaperclip stroke={1.5} />}
         label="Attach Your CV" placeholder="Your CV..." leftSectionPointerEvents="none" />
-        <Textarea {...form.getInputProps("coverLetter")} readOnly={preview} variant={preview?"unstyled":"default"} className={`${preview?"text-mine-shaft-300 font-semibold":""}`} withAsterisk placeholder="Type something About Yourself" label="Cover Letter" autosize minRows={4} />
+        <Textarea {...form.getInputProps("Introduction")} readOnly={preview} variant={preview?"unstyled":"default"} className={`${preview?"text-mine-shaft-300 font-semibold":""}`} withAsterisk placeholder="Type something About Yourself" label="Introduce Yourself" autosize minRows={4} />
         {!preview && <Button onClick={handlePreview} color="brightSun.4" variant="light">Preview</Button>}
         {
             preview && <div className="flex gap-10 [&>*]:w-1/2">

@@ -47,7 +47,7 @@ const Info=()=>{
                 </div>
                 <div className="flex gap-10 [&>*]w-1/2">
                 <SelectInput form={form} name="location" {...select[2]} />
-                <NumberInput withAsterisk label="Total Experience" hideControls clampBehavior="strict" min={1} max={50} {...form.getInputProps('totalExp')} />
+                <NumberInput withAsterisk label="Total Experience" hideControls clampBehavior="strict" min={0} max={50} {...form.getInputProps('totalExp')} />
                 </div>
                 </>:<><div className="text-xl flex gap-1 items-center"><IconBriefcase className="h-5 w-5" stroke={1.5} />
                 {profile.jobTitle} &bull; {profile.company}</div>

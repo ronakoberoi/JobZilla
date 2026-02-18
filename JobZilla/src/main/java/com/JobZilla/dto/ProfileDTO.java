@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -25,10 +27,13 @@ public class ProfileDTO {
     private List<Experience> experience;
     private List<Certification> certifications;
     private List<Long>savedJobs;
+    private List<Map<String,Object>> acceptedJobs = new ArrayList<>();
+    private List<Map<String,Object>> rejectedJobs = new ArrayList<>();
+
 
     public Profile toEntity() {
         return new Profile(this.id,this.name, this.email, this.jobTitle, this.company,
         this.location, this.about, this.picture!=null?Base64.getDecoder().decode(this.picture):null, this.totalExp, 
-        this.skills, this.experience, this.certifications, this.savedJobs);
+        this.skills, this.experience, this.certifications, this.savedJobs,this.acceptedJobs,this.rejectedJobs);
     }
 }

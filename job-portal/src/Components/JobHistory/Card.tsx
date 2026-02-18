@@ -5,9 +5,11 @@ import { timeAgo } from "../../Services/Utilities"
 import { useDispatch, useSelector } from "react-redux"
 import { changeProfile } from "../../Slices/ProfileSlice"
 import { successNotification } from "../../Services/NotificationServices";
+import axios from "axios";
 
 const Card = (props:any) => {
-    const dispatch = useDispatch();
+        const user = useSelector((state:any)=>state.user);
+        const dispatch = useDispatch();
         const profile=useSelector((state:any)=>state.profile);
         const handleSaveJob=()=>{
             let savedJobs:any=[...(profile.savedJobs || [])];
@@ -20,17 +22,31 @@ const Card = (props:any) => {
             dispatch(changeProfile(updatedProfile));
         }
         const handleAccept = () => {
-            successNotification("Congratulations 🎉", "You accepted the offer!");
-            let updated = {...profile,acceptedJobs: [...(profile.acceptedJobs || []), props.id]};
-            dispatch(changeProfile(updated));
+            const job = {
+                jobId: props.id,
+                title: props.jobTitle,
+                company: props.company
+            };
+            axios.post(`http://localhost:8080/profiles/accept/${user.id}`, job).then((res:any)=>{
+                dispatch(changeProfile(res.data));
+                successNotification("Congratulations 🎉", "Offer accepted");})
+                .catch(err=>console.log(err));
         };
         const handleReject = () => {
-            successNotification("Job Rejected", "You rejected the offer");
-            let updated = {...profile,rejectedJobs: [...(profile.rejectedJobs || []), props.id]};
-            dispatch(changeProfile(updated));
+            const job = {
+                jobId: props.id,
+                title: props.jobTitle,
+                company: props.company
+            };
+            axios.post(`http://localhost:8080/profiles/reject/${user.id}`, job).then((res:any)=>{
+                dispatch(changeProfile(res.data));
+                successNotification("Job Rejected", "Offer rejected");})
+                .catch(err=>console.log(err));
         };
-const isAccepted = profile.acceptedJobs?.includes(props.id);
-const isRejected = profile.rejectedJobs?.includes(props.id);
+
+const isAccepted = profile.acceptedJobs?.some((j:any)=>j.jobId===props.id);
+const isRejected = profile.rejectedJobs?.some((j:any)=>j.jobId===props.id);
+
   return <div className="bg-mine-shaft-900 p-4 mx-5 my-3 w-72 flex flex-col gap-3 rounded-xl
   hover:shadow-[0_0_5px_1px_yellow] !shadow-bright-sun-400">
     <div className="flex justify-between">

@@ -46,7 +46,7 @@ const MultiInput=(props:any)=> {
       </Pill>
     ));
 
-  const options = data.filter((item)=> item.toLowerCase().includes(search.trim().toLowerCase())).map((item) => (
+  const options = data.filter((item)=> (item || "").toLowerCase().includes((search || "").trim().toLowerCase())).map((item) => (
     <Combobox.Option value={item} key={item} active={value.includes(item)}>
       <Group gap="sm">
         <Checkbox size="xs" color='brightSun.4'
@@ -87,7 +87,7 @@ const MultiInput=(props:any)=> {
         <Combobox.Search
             value={search}
             onChange={(event) => setSearch(event.currentTarget.value)}
-            placeholder="Search groceries"
+            placeholder="Search !!"
           />
         <Combobox.Options>
           {options}

@@ -3,7 +3,7 @@ import { IconBriefcase, IconMapPin, IconRecharging, IconSearch } from "@tabler/i
 const searchFields=[
     { title: "Job Title", icon: IconSearch, options: ['Designer', 'Developer', 'Product Manager', 'Marketing Specialist', 'Data Analyst', 'Sales Executive', 'Content Writer', 'Customer Support'] },
     { title: "Location", icon: IconMapPin, options: ['Delhi', 'Chandigarh', 'Pune', 'Banglore', 'Noida', 'Mumbai', 'Gurugram', 'Mohali'] },
-    { title: "Skills", icon: IconRecharging, options: ["HTML","CSS","JavaScript","React","Angular","Node.js","Python","Java","Ruby","PHP","SQL","MongoDB","PostgreSQL","Git","API Development","Testing and Debugging","Agile Methodologies","DevOps","AWS","Azure","Google Cloud"] },
+    { title: "Skills", icon: IconRecharging, options: ["HTML","CSS","JavaScript","React",,"Node.js","Python","Java","SQL","MongoDB","Git","Testing and Debugging","AWS","Google Cloud"] },
 ]
 const talents = [
     {

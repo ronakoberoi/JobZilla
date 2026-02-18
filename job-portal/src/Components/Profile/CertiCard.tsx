@@ -1,9 +1,10 @@
 import { ActionIcon } from "@mantine/core"
-import { IconTrash } from "@tabler/icons-react"
+import { IconCertificate, IconTrash } from "@tabler/icons-react"
 import { formatDate } from "../../Services/Utilities"
 import { useDispatch, useSelector } from "react-redux"
 import { changeProfile } from "../../Slices/ProfileSlice"
 import { successNotification } from "../../Services/NotificationServices"
+import { useState } from "react"
 
 const CertiCard = (props:any) => {
     const dispatch=useDispatch();
@@ -15,11 +16,24 @@ const CertiCard = (props:any) => {
         dispatch(changeProfile(updatedProfile));
         successNotification("Success", "Certificate Deleted Successfully");
     }
+    const [imgError, setImgError] = useState(false);
+
   return <div className="flex justify-between">
         <div className="flex gap-2 items-center">
-            <div className="p-2 bg-mine-shaft-800 rounded-md">
-                <img className="h-7" src={`/Icons/${props.issuer}.png`} alt="" />
-            </div>
+            <div className="p-2 bg-mine-shaft-800 rounded-md flex items-center justify-center">
+  {!imgError ? (
+    <img
+      className="h-7"
+      src={`/Icons/${props.issuer}.png`}
+      onError={() => setImgError(true)}
+      alt=""
+    />
+  ) : (
+    <IconCertificate stroke={1.5} className="h-6 w-6 text-bright-sun-400" />
+  )}
+</div>
+
+
             <div className="flex flex-col">
                 <div className="font-semibold">{props.name}</div>
                 <div className="text-sm text-mine-shaft-300">{props.issuer}</div>

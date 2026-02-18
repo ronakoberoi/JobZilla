@@ -23,8 +23,9 @@ const Profile = ()=>{
             <img className="w-32 h-32 rounded-full -bottom-1/3 absolute left-3 border-mine-shaft-950 border-8" src={profile.picture ? `data:image/jpeg;base64,${profile.picture}`:"/Avatar.png"} alt="" />
             </div>
             <div className="px-3 mt-16">
-                <div className="text-2xl font-semibold flex justify-between">{profile?.name} <Button
-                color="brightSun.4" variant="light">Message</Button></div>
+                <div className="text-2xl font-semibold flex justify-between">{profile?.name}
+                    {/* <Button color="brightSun.4" variant="light">Message</Button> */}
+                    </div>
                 <div className="text-xl flex gap-1 items-center"><IconBriefcase className="h-5 w-5" stroke={1.5} />
                 {profile?.jobTitle} &bull; {profile?.company}</div>
                 <div className="text-lg flex gap-1 items-center text-mine-shaft-300">

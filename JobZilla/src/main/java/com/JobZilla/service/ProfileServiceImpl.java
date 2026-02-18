@@ -2,6 +2,7 @@ package com.JobZilla.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,4 +49,18 @@ public class ProfileServiceImpl implements ProfileService {
         return profileRepository.findAll().stream().map((x)->x.toDTO()).toList();
     }
 
+    @Override
+    public ProfileDTO acceptJob(Long userId, Map<String,Object> job){
+        Profile profile = profileRepository.findById(userId).orElseThrow();
+        profile.getAcceptedJobs().add(job);
+        profileRepository.save(profile);
+        return profile.toDTO();
+    }
+    @Override
+    public ProfileDTO rejectJob(Long userId, Map<String,Object> job){
+        Profile profile = profileRepository.findById(userId).orElseThrow();
+        profile.getRejectedJobs().add(job);
+        profileRepository.save(profile);
+        return profile.toDTO();
+    }
 }
