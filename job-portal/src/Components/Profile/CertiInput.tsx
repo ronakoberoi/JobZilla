@@ -31,7 +31,8 @@ const CertiInput = (props:any) => {
       if(!form.isValid()) return;
       let certi=[...profile.certifications];
       certi.push(form.getValues());
-      certi[certi.length-1].issueDate=certi[certi.length-1].issueDate.toISOString();
+      const last = certi[certi.length - 1];
+      last.issueDate = last.issueDate ? new Date(last.issueDate).toISOString() : null;
       let updatedProfile={...profile, certifications:certi};
       props.setEdit(false);
       dispatch(changeProfile(updatedProfile));

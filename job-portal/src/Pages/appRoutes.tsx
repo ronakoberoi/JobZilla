@@ -16,6 +16,7 @@ import TalentProfilePage from './TalentProfilePage';
 import HomePage from './HomePage';
 import Footer from '../Components/Footer/Footer';
 import { useSelector } from 'react-redux';
+import RoleProtectedRoute from '../Components/RoleProtectedRoute';
 
 const AppRoutes=()=>{
     const user=useSelector((state:any)=>state.user)
@@ -25,18 +26,18 @@ const AppRoutes=()=>{
       <Header />
       <Divider size="xs" mx="md" />
       <Routes>
-        <Route path='/find-jobs' element={<FindJobsPage />} />
-        <Route path='/find-talent' element={<FindTalentPage />} />
-        <Route path='/jobs/:id' element={<JobDescPage />} />
-        <Route path="/apply-job/:id" element={<ApplyJobPage />} />
-        <Route path='/post-job/:id' element={<PostJobPage />} />
-        <Route path='/posted-jobs/:id' element={<PostedJobPage />} />
-        <Route path='/job-history' element={<JobHistoryPage />} />
-        <Route path='/company/:name' element={<CompanyPage />} />
+        <Route path="/find-jobs" element={ <RoleProtectedRoute allow={["APPLICANT","EMPLOYER"]}> <FindJobsPage /> </RoleProtectedRoute>} />
+        <Route path='/find-talent' element={ <RoleProtectedRoute allow={["APPLICANT","EMPLOYER"]}><FindTalentPage /> </RoleProtectedRoute>}/>
+        <Route path='/jobs/:id' element={ <RoleProtectedRoute allow={["APPLICANT","EMPLOYER"]}><JobDescPage /> </RoleProtectedRoute>} />
+        <Route path="/apply-job/:id" element={<RoleProtectedRoute allow={["APPLICANT","EMPLOYER"]}><ApplyJobPage /> </RoleProtectedRoute>} />
+        <Route path='/post-job/:id' element={<RoleProtectedRoute allow={["EMPLOYER"]}><PostJobPage /> </RoleProtectedRoute>} />
+        <Route path="/posted-jobs/:id" element={ <RoleProtectedRoute allow={["EMPLOYER"]}><PostedJobPage /> </RoleProtectedRoute>} />
+        <Route path='/job-history' element={<RoleProtectedRoute allow={["APPLICANT","EMPLOYER"]}><JobHistoryPage /></RoleProtectedRoute>} />
+        <Route path='/company/:name' element={<RoleProtectedRoute allow={["APPLICANT","EMPLOYER"]}><CompanyPage /></RoleProtectedRoute>} />
         <Route path='/signup' element={user?<Navigate to="/" />:<SignUpPage />} />
         <Route path='/profile' element={<ProfilePage />} />
         <Route path='/login' element={user?<Navigate to="/" />:<SignUpPage />} />
-        <Route path='/talent-profile/:id' element={<TalentProfilePage />} />
+        <Route path='/talent-profile/:id' element={<RoleProtectedRoute allow={["APPLICANT","EMPLOYER"]}> <TalentProfilePage /> </RoleProtectedRoute>} />
         <Route path='*' element={<HomePage />} />
       </Routes>
       <Footer />

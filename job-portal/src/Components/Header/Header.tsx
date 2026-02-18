@@ -26,7 +26,7 @@ const Header =() => {
             <IconBriefcase2 className="h-8 w-8" stroke={2} />
             <div className="text-3xl font-semibold">JobZilla</div>
         </Link>
-        {NavLinks()}
+        {NavLinks(user?.accountType)}
         <div className="flex gap-3 items-center">
             {user?<ProfileMenu />:<Link to="/login">
             <Button variant="subtle" color="brightSun.4">Login</Button>

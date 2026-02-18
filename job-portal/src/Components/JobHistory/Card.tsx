@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import { timeAgo } from "../../Services/Utilities"
 import { useDispatch, useSelector } from "react-redux"
 import { changeProfile } from "../../Slices/ProfileSlice"
+import { successNotification } from "../../Services/NotificationServices";
 
 const Card = (props:any) => {
     const dispatch = useDispatch();
@@ -18,6 +19,18 @@ const Card = (props:any) => {
             let updatedProfile={...profile, savedJobs:savedJobs};
             dispatch(changeProfile(updatedProfile));
         }
+        const handleAccept = () => {
+            successNotification("Congratulations 🎉", "You accepted the offer!");
+            let updated = {...profile,acceptedJobs: [...(profile.acceptedJobs || []), props.id]};
+            dispatch(changeProfile(updated));
+        };
+        const handleReject = () => {
+            successNotification("Job Rejected", "You rejected the offer");
+            let updated = {...profile,rejectedJobs: [...(profile.rejectedJobs || []), props.id]};
+            dispatch(changeProfile(updated));
+        };
+const isAccepted = profile.acceptedJobs?.includes(props.id);
+const isRejected = profile.rejectedJobs?.includes(props.id);
   return <div className="bg-mine-shaft-900 p-4 mx-5 my-3 w-72 flex flex-col gap-3 rounded-xl
   hover:shadow-[0_0_5px_1px_yellow] !shadow-bright-sun-400">
     <div className="flex justify-between">
@@ -51,12 +64,32 @@ const Card = (props:any) => {
         </div>
     </div>
     {(props.offered || props.interviewing) && <Divider size="xs" color="mineShaft.7" />}
-    {
-        props.offered && <div className="flex gap-2">
-            <Button fullWidth color="brightSun.4" variant="outline">Accept</Button>
-            <Button fullWidth color="brightSun.3" variant="light">Reject</Button>
-        </div>
-    }
+{
+    props.offered && !isAccepted && !isRejected && (
+    <div className="flex gap-2">
+      <Button onClick={handleAccept} fullWidth color="green" variant="outline">
+        Accept
+      </Button>
+      <Button onClick={handleReject} fullWidth color="red" variant="light">
+        Reject
+      </Button>
+    </div>
+  )
+}
+{
+  isAccepted && (
+    <div className="text-green-400 font-semibold text-center">
+      Accepted ✔
+    </div>
+  )
+}
+{
+    isRejected && (
+    <div className="text-red-400 font-semibold text-center">
+      Rejected ✖
+    </div>
+    )
+}
     {
         props.interviewing &&<div className="flex gap-1 text-sm items-center">
             <IconCalendarMonth className="text-bright-sun-400 w-5 h-5" stroke={1.5} /> Sun, 31 August &bull; 
