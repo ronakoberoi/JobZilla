@@ -1,1 +1,3 @@
 node_modules
+src/main/resources/application.properties
+JobZilla/src/main/resources/application.properties
