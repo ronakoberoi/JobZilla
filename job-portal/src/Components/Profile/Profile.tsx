@@ -24,7 +24,7 @@ const Profile = ()=>{
     return <div className="w-4/5 mx-auto">
         <div className="">
         <div className="relative">
-            <img className="rounded-t-2xl w-400 h-40" src="/Profile/Banner.jpg" alt="" />
+            <img className="rounded-t-2xl w-400 h-40" src="/Profile/banner.jpg" alt="" />
             <div ref={ref} className="absolute flex items-center justify-center -bottom-1/3 left-3">
             <Avatar className="!w-48 !h-48 border-mine-shaft-950 border-8 rounded-full" src={profile.picture ? `data:image/jpeg;base64,${profile.picture}`:"/Avatar.png"} alt="" />
             {hovered && <Overlay className="!rounded-full" color="#000" backgroundOpacity={0.70} />}

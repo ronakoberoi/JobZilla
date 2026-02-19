@@ -52,7 +52,7 @@ const isRejected = profile.rejectedJobs?.some((j:any)=>j.jobId===props.id);
     <div className="flex justify-between">
         <div className="flex gap-2 items-center">
             <div className="p-2 bg-mine-shaft-800 rounded-md">
-                <img className="h-7" src={`/Icons/${props.company}.png`} alt="" />
+                <img className="h-7" src={`/Icons/${props.company.toLowerCase()}.png`} alt="" />
             </div>
             <div className="flex flex-col gap-1">
                 <div className="font-semibold">{props.jobTitle}</div>

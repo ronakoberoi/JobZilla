@@ -21,7 +21,7 @@ const ExpCard = (props:any) => {
     <div className="flex justify-between">
         <div className="flex gap-2 items-center">
             <div className="p-2 bg-mine-shaft-800 rounded-md">
-                <img className="h-7" src={`/Icons/${props.company}.png`} alt="" />
+                <img className="h-7" src={`/Icons/${props.company.toLowerCase()}.png`} alt="" />
             </div>
             <div className="flex flex-col">
                 <div className="font-semibold">{props.title}</div>

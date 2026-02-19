@@ -8,8 +8,8 @@ import CompanyEmployees from "./CompanyEmployees"
 const Company = () => {
   return <div className="w-3/4">
     <div className="relative">
-            <img className="rounded-t-2xl" src="/Profile/Banner.jpg" alt="" />
-            <img className="w-28 h-28 rounded-3xl -bottom-1/4 absolute p-2 left-5 bg-mine-shaft-950 border-mine-shaft-950 border-8" src="/Icons/Google.png" alt="" />
+            <img className="rounded-t-2xl" src="/Profile/banner.jpg" alt="" />
+            <img className="w-28 h-28 rounded-3xl -bottom-1/4 absolute p-2 left-5 bg-mine-shaft-950 border-mine-shaft-950 border-8" src="/Icons/google.png" alt="" />
             </div>
             <div className="px-3 mt-12">
                 <div className="text-3xl font-semibold flex justify-between">Google <AvatarGroup>

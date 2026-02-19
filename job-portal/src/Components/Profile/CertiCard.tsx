@@ -24,7 +24,7 @@ const CertiCard = (props:any) => {
   {!imgError ? (
     <img
       className="h-7"
-      src={`/Icons/${props.issuer}.png`}
+      src={`/Icons/${props.issuer.toLowerCase()}.png`}
       onError={() => setImgError(true)}
       alt=""
     />

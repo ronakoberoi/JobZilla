@@ -19,8 +19,8 @@ const Profile = ()=>{
     }, [id])
     return <div className="w-2/3">
         <div className="relative">
-            <img className="rounded-t-2xl w-400 h-40" src="/Profile/Banner.jpg" alt="" />
-            <img className="w-32 h-32 rounded-full -bottom-1/3 absolute left-3 border-mine-shaft-950 border-8" src={profile.picture ? `data:image/jpeg;base64,${profile.picture}`:"/Avatar.png"} alt="" />
+            <img className="rounded-t-2xl w-400 h-40" src="/Profile/banner.jpg" alt="" />
+            <img className="w-32 h-32 rounded-full -bottom-1/3 absolute left-3 border-mine-shaft-950 border-8" src={profile.picture ? `data:image/jpeg;base64,${profile.picture}`:"/avatar.png"} alt="" />
             </div>
             <div className="px-3 mt-16">
                 <div className="text-2xl font-semibold flex justify-between">{profile?.name}
