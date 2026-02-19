@@ -102,9 +102,9 @@ const Job = (props:any) => {
                 <div className="text-mine-shaft-300"> 10K+ Employees</div>
             </div>
             </div>
-            <Link to={`/company/${props.company}`}>
+            {/* <Link to={`/company/${props.company}`}>
             <Button variant="light" color="brightSun.4">Company Page</Button>
-            </Link>
+            </Link> */}
         </div>
         <div className="text-mine-shaft-300 text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo quod earum nihil facilis omnis natus repellat cumque aut, ab laboriosam fugit voluptates
              non dolorem. Reprehenderit id libero totam quidem molestiae voluptatem recusandae dolore repudiandae,

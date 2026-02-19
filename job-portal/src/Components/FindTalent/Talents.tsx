@@ -6,6 +6,8 @@ import Sort from "../FindJobs/Sort";
 import { useDispatch, useSelector } from "react-redux";
 import { resetFilter } from "../../Slices/FilterSlice";
 import { resetSort } from "../../Slices/SortSlice";
+import { IconSearchOff } from "@tabler/icons-react";
+import { Card } from "@mantine/core";
 
 
 const Talents = () => {
@@ -14,11 +16,15 @@ const Talents = () => {
   const filter=useSelector((stae:any)=>stae.filter);
   const sort=useSelector((state:any)=>state.sort);
   const [filteredTalents, setFilteredTalents]=useState<any>([]);
+  const user = useSelector((state:any)=>state.user);
   useEffect(()=>{
     dispatch(resetFilter());
     dispatch(resetSort());
     getAllProfiles().then((res)=>{
-      setTalents(res);
+      const onlyApplicants = res.filter((p:any)=>
+      p.accountType === "APPLICANT"
+    );
+    setTalents(onlyApplicants);
     }).catch((err)=>{
       console.log(err);
     })
@@ -56,7 +62,12 @@ const Talents = () => {
     <div className="mt-10 flex flex-wrap gap-5 justify-between">
         {
             filteredTalents?.length?filteredTalents.map((talent:any, index:any)=>
-            <TalentCard key={index} {...talent} />):<div className="text-xl font-semibold">No Talents Found</div>
+            <TalentCard key={index} {...talent} />):
+            <div className="w-full py-14 flex flex-col items-center justify-center bg-mine-shaft-950">
+            <IconSearchOff size={60} className="text-bright-sun-400 mb-5" />
+            <div className="text-2xl font-semibold text-mine-shaft-100 mb-2">No Talents Found</div>
+            <div className="text-mine-shaft-400 text-sm text-center max-w-md">We couldn’t find any talents matching your filters.Try adjusting your search criteria.</div>
+            </div>
         }
     </div>
   </div>

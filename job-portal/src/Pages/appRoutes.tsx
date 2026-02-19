@@ -32,8 +32,8 @@ const AppRoutes=()=>{
         <Route path="/apply-job/:id" element={<RoleProtectedRoute allow={["APPLICANT","EMPLOYER"]}><ApplyJobPage /> </RoleProtectedRoute>} />
         <Route path='/post-job/:id' element={<RoleProtectedRoute allow={["EMPLOYER"]}><PostJobPage /> </RoleProtectedRoute>} />
         <Route path="/posted-jobs/:id" element={ <RoleProtectedRoute allow={["EMPLOYER"]}><PostedJobPage /> </RoleProtectedRoute>} />
-        <Route path='/job-history' element={<RoleProtectedRoute allow={["APPLICANT","EMPLOYER"]}><JobHistoryPage /></RoleProtectedRoute>} />
-        <Route path='/company/:name' element={<RoleProtectedRoute allow={["APPLICANT","EMPLOYER"]}><CompanyPage /></RoleProtectedRoute>} />
+        <Route path='/job-history' element={<RoleProtectedRoute allow={["APPLICANT"]}><JobHistoryPage /></RoleProtectedRoute>} />
+        {/* <Route path='/company/:name' element={<RoleProtectedRoute allow={["APPLICANT","EMPLOYER"]}><CompanyPage /></RoleProtectedRoute>} /> */}
         <Route path='/signup' element={user?<Navigate to="/" />:<SignUpPage />} />
         <Route path='/profile' element={<ProfilePage />} />
         <Route path='/login' element={user?<Navigate to="/" />:<SignUpPage />} />
