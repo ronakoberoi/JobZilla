@@ -1,6 +1,6 @@
 import axios from "axios";
 import { error } from "console";
-const base_url="http://localhost:8080/notification/";
+const base_url="https://jobzilla-backend.onrender.com/notification/";
 
 const getNotifications = async(id:any)=>{
     return axios.get(`${base_url}get/${id}`)

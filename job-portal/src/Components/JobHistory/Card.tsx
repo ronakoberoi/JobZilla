@@ -27,7 +27,7 @@ const Card = (props:any) => {
                 title: props.jobTitle,
                 company: props.company
             };
-            axios.post(`http://localhost:8080/profiles/accept/${user.id}`, job).then((res:any)=>{
+            axios.post(`https://jobzilla-backend.onrender.com/profiles/accept/${user.id}`, job).then((res:any)=>{
                 dispatch(changeProfile(res.data));
                 successNotification("Congratulations 🎉", "Offer accepted");})
                 .catch(err=>console.log(err));
@@ -38,7 +38,7 @@ const Card = (props:any) => {
                 title: props.jobTitle,
                 company: props.company
             };
-            axios.post(`http://localhost:8080/profiles/reject/${user.id}`, job).then((res:any)=>{
+            axios.post(`https://jobzilla-backend.onrender.com/profiles/reject/${user.id}`, job).then((res:any)=>{
                 dispatch(changeProfile(res.data));
                 successNotification("Job Rejected", "Offer rejected");})
                 .catch(err=>console.log(err));

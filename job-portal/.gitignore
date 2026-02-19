@@ -24,3 +24,10 @@ yarn-error.log*
 
 
 application.properties
+
+/src/.env
+.env
+/.env
+src/.env
+/job-portal/src/.env
+job-portal/src/.env

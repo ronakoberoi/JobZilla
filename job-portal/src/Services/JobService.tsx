@@ -1,5 +1,5 @@
 import axios from 'axios';
-const base_url = "http://localhost:8080/jobs/"
+const base_url = "https://jobzilla-backend.onrender.com/jobs/"
 
 const postJob = async (job:any)=> {
     return axios.post(`${base_url}post`,job)

@@ -1,5 +1,5 @@
 import axios from "axios"
-const base_url="http://localhost:8080/users/"
+const base_url="https://jobzilla-backend.onrender.com/users/"
 
 const registerUser= async (user:any)=>{
     return axios.post(`${base_url}register`, user)
