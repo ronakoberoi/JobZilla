@@ -18,6 +18,8 @@ import java.util.Optional;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 class UserServiceImplTest {
@@ -60,7 +62,7 @@ class UserServiceImplTest {
         when(userDTO.getName()).thenReturn("New User");
         when(userDTO.getPassword()).thenReturn("password");
         when(userRepository.findByEmail("new@example.com")).thenReturn(Optional.empty());
-        when(profileService.createProfile(anyString(), anyString())).thenReturn(1L);
+        when(profileService.createProfile(anyString(), anyString(), any())).thenReturn(1L);
         when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
         User user = mock(User.class);
         when(userDTO.toEntity()).thenReturn(user);

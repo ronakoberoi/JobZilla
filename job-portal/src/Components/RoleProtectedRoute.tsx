@@ -6,7 +6,6 @@ const RoleProtectedRoute = ({ children, allow }: any) => {
 
   // not logged in
   if (!user) return <Navigate to="/login" />;
-  console.log(user?.accountType);
   // role not allowed
   if (!allow.includes(user.accountType)) {
     return (

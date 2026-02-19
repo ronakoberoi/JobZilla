@@ -1,5 +1,6 @@
 package com.JobZilla.service;
 
+import com.JobZilla.dto.AccountType;
 import com.JobZilla.dto.ProfileDTO;
 import com.JobZilla.entity.Profile;
 import com.JobZilla.exception.JobZillaException;
@@ -42,7 +43,7 @@ class ProfileServiceImplTest {
 
         when(profileRepository.save(any(Profile.class))).thenReturn(profile);
 
-        Long id = profileService.createProfile(email, name);
+        Long id = profileService.createProfile(email, name, AccountType.APPLICANT);
         assertNotNull(id);
         verify(profileRepository, times(1)).save(any(Profile.class));
     }

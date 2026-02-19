@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.JobZilla.dto.ProfileDTO;
+import com.JobZilla.dto.AccountType;
 import com.JobZilla.dto.Certification;
 import com.JobZilla.dto.Experience;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ public class Profile {
     private Long id;
     private String name;
     private String email;
+    private AccountType accountType;
     private String jobTitle;
     private String company;
     private String location;
@@ -38,7 +40,7 @@ public class Profile {
 
 
     public ProfileDTO toDTO(){
-        return new ProfileDTO(this.id,this.name, this.email, this.jobTitle, this.company, this.location, this.about, 
+        return new ProfileDTO(this.id,this.name, this.email,this.accountType, this.jobTitle, this.company, this.location, this.about, 
         this.picture!=null?Base64.getEncoder().encodeToString(this.picture):null, this.totalExp,
         this.skills, this.experience, this.certifications, this.savedJobs, this.acceptedJobs, this.rejectedJobs);
     }

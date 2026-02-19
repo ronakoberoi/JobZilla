@@ -3,11 +3,12 @@ package com.JobZilla.service;
 import java.util.List;
 import java.util.Map;
 
+import com.JobZilla.dto.AccountType;
 import com.JobZilla.dto.ProfileDTO;
 import com.JobZilla.exception.JobZillaException;
 
 public interface ProfileService {
-    public Long createProfile(String email, String name) throws JobZillaException;
+    public Long createProfile(String email, String name, AccountType accountType) throws JobZillaException;
 
     public ProfileDTO getProfile(Long id) throws JobZillaException;
 
