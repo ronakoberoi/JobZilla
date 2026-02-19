@@ -7,6 +7,7 @@ import { changeProfile } from "../../Slices/ProfileSlice";
 import { successNotification } from "../../Services/NotificationServices";
 
 const ExpCard = (props:any) => {
+    const companyName = props.company ? props.company.toLowerCase() : "default";
     const dispatch=useDispatch();
     const [edit, setEdit] = useState(false);
     const profile=useSelector((state:any)=>state.profile);
@@ -21,7 +22,7 @@ const ExpCard = (props:any) => {
     <div className="flex justify-between">
         <div className="flex gap-2 items-center">
             <div className="p-2 bg-mine-shaft-800 rounded-md">
-                <img className="h-7" src={`/Icons/${props.company.toLowerCase()}.png`} alt="" />
+                <img className="h-7" src={`/Icons/${companyName}.png`} alt="" />
             </div>
             <div className="flex flex-col">
                 <div className="font-semibold">{props.title}</div>

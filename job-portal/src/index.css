@@ -1,8 +1,16 @@
+html, body, #root {
+  width: 100%;
+  overflow-x: hidden;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base{
+html, body, #root {
+  width: 100%;
+  overflow-x: hidden;
+}
     ul, ol{
         list-style: revert;
         font-size: medium;
@@ -13,4 +21,8 @@
     li{
         margin-left: 1em;
     }
+}
+html, body, #root {
+  width: 100%;
+  overflow-x: hidden;
 }

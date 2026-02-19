@@ -6,11 +6,12 @@ import ApplicationForm from "./ApplicationForm";
 import { timeAgo } from "../../Services/Utilities";
 
 const ApplyJobComp = (props: any) => {
-  return <div className="w-2/3 mx-auto">
+    const companyName = props.company ? props.company.toLowerCase() : "default";
+  return <div className="w-2/3 mx-auto">    
     <div className="flex justify-between">
         <div className="flex gap-2 items-center">
             <div className="p-3 bg-mine-shaft-800 rounded-xl">
-                <img className="h-14" src={`/Icons/${props.company.toLowerCase()}.png`} alt="" />
+                <img className="h-14" src={`/Icons/${companyName}.png`} alt="" />
             </div>
             <div className="flex flex-col gap-1">
                 <div className="font-semibold text-2xl">{props.jobTitle}</div>

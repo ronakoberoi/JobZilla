@@ -7,6 +7,7 @@ import { successNotification } from "../../Services/NotificationServices"
 import { useState } from "react"
 
 const CertiCard = (props:any) => {
+    const issuerName = props.issuer ? props.issuer.toLowerCase() : "default"; 
     const dispatch=useDispatch();
     const profile=useSelector((state:any)=>state.profile);
     const handleDelete=()=>{
@@ -24,7 +25,7 @@ const CertiCard = (props:any) => {
   {!imgError ? (
     <img
       className="h-7"
-      src={`/Icons/${props.issuer.toLowerCase()}.png`}
+      src={`/Icons/${issuerName}.png`}
       onError={() => setImgError(true)}
       alt=""
     />

@@ -9,7 +9,8 @@ return <div className="mt-20 pb-5">
         <Marquee pauseOnHover={true}>
             {
                 companies.map((company, index)=><div key={index} className="mx-8 px-2 py-1 hover:bg-mine-shaft-900 rounded-xl cursor-pointer">
-                    <img className="h-14" src={`/Companies/${company.toLowerCase()}.png`} alt={company} />
+                    <img className="h-14" src={`/Companies/${company?.toLowerCase?.() || "default"}.png`} alt={company || "company"} 
+                    onError={(e: any) => { e.currentTarget.src = "/Companies/default.png";}} />
                 </div>)
             }
             

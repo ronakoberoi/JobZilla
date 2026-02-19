@@ -12,6 +12,7 @@ import { postJob } from "../../Services/JobService";
 import { errorNotification, successNotification } from "../../Services/NotificationServices";
 
 const Job = (props:any) => {
+    const companyName = props.company ? props.company.toLowerCase() : "default";
     const dispatch = useDispatch();
     const [applied, setApplied] = useState(false);
     const profile=useSelector((state:any)=>state.profile);
@@ -45,7 +46,7 @@ const Job = (props:any) => {
     <div className="flex justify-between">
         <div className="flex gap-2 items-center">
             <div className="p-3 bg-mine-shaft-800 rounded-xl">
-                <img className="h-14" src={`/Icons/${props.company.toLowerCase()}.png`} alt="" />
+                <img className="h-14" src={`/Icons/${companyName}.png`} alt="" />
             </div>
             <div className="flex flex-col gap-1">
                 <div className="font-semibold text-2xl">{props.jobTitle}</div>
@@ -94,7 +95,7 @@ const Job = (props:any) => {
         <div className="flex justify-between mb-3">
         <div className="flex gap-2 items-center">
             <div className="p-3 bg-mine-shaft-800 rounded-xl">
-                <img className="h-8" src={`/Icons/${props.company.toLowerCase()}.png`} alt="" />
+                <img className="h-8" src={`/Icons/${companyName}.png`} alt="" />
             </div>
             <div className="flex flex-col">
                 <div className="font-medium text-lg">{props.company}</div>

@@ -19,7 +19,7 @@ const Working = () => {
                 {
                     work.map((item, index) => <div key={index} className="flex items-center gap-4">
                     <div className="p-2.5 bg-bright-sun-300 rounded-full">
-                        <img className="h-12 w-12" src={`/Working/${item.name.toLowerCase()}.png`} alt="{item.name}" />
+                        <img className="h-12 w-12" src={`/Working/${item?.name?.toLowerCase?.()}.png`} alt="{item.name}" />
                     </div>
                     <div>
                         <div className="text-mine-shaft-200 text-xl font-semibold">{item.name}</div>

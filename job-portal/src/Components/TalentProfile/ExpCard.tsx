@@ -1,11 +1,12 @@
 import { formatDate } from "../../Services/Utilities"
 
 const ExpCard = (props:any) => {
+    const companyName = props.company ? props.company.toLowerCase() : "default";
   return <div className="flex flex-col gap-2">
     <div className="flex justify-between">
         <div className="flex gap-2 items-center">
             <div className="p-2 bg-mine-shaft-800 rounded-md">
-                <img className="h-7" src={`/Icons/${props.company.toLowerCase()}.png`} alt="" />
+                <img className="h-7" src={`/Icons/${companyName}.png`} alt="" />
             </div>
             <div className="flex flex-col">
                 <div className="font-semibold">{props.title}</div>

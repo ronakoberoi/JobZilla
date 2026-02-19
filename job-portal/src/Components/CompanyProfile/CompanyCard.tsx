@@ -2,10 +2,11 @@ import { ActionIcon } from "@mantine/core";
 import { IconAdjustments, IconBookmark, IconExternalLink } from "@tabler/icons-react";
 
 const CompanyCard =(props:any)=> {
+    const companyName = props.company ? props.company.toLowerCase() : "default";
     return <div><div className="flex justify-between bg-mine-shaft-900 items-center rounded-lg p-2">
         <div className="flex gap-2 items-center">
             <div className="p-2 bg-mine-shaft-800 rounded-md">
-                <img className="h-7" src={`/Icons/${props.name.toLowerCase()}.png`} alt="" />
+                <img className="h-7" src={`/Icons/${companyName}.png`} alt="" />
             </div>
             <div className="flex flex-col gap-1">
                 <div className="font-semibold">{props.name}</div>

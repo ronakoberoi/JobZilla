@@ -46,13 +46,13 @@ const Card = (props:any) => {
 
 const isAccepted = profile.acceptedJobs?.some((j:any)=>j.jobId===props.id);
 const isRejected = profile.rejectedJobs?.some((j:any)=>j.jobId===props.id);
-
+const companyName = props.company ? props.company.toLowerCase() : "default";
   return <div className="bg-mine-shaft-900 p-4 mx-5 my-3 w-72 flex flex-col gap-3 rounded-xl
   hover:shadow-[0_0_5px_1px_yellow] !shadow-bright-sun-400">
     <div className="flex justify-between">
         <div className="flex gap-2 items-center">
             <div className="p-2 bg-mine-shaft-800 rounded-md">
-                <img className="h-7" src={`/Icons/${props.company.toLowerCase()}.png`} alt="" />
+                <img className="h-7" src={`/Icons/${companyName}.png`} alt="" />
             </div>
             <div className="flex flex-col gap-1">
                 <div className="font-semibold">{props.jobTitle}</div>

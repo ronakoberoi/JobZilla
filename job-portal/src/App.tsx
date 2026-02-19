@@ -30,7 +30,9 @@ function App() {
     <Provider store={Store}>
     <MantineProvider defaultColorScheme='dark' theme={theme}>
       <Notifications position="top-center" zIndex={1000}/>
-      <AppRoutes />
+      <div className="min-h-screen w-full overflow-x-hidden">
+        <AppRoutes />
+      </div>
     </MantineProvider>
     </Provider>
   );
