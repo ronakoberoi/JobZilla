@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { changeProfile } from "../../Slices/ProfileSlice"
 
 const JobCard = (props:any) => {
+    const companyName = props.company ? props.company.toLowerCase() : "default";
     const dispatch = useDispatch();
     const profile=useSelector((state:any)=>state.profile);
     const handleSaveJob=()=>{
@@ -23,7 +24,7 @@ const JobCard = (props:any) => {
     <div className="flex justify-between">
         <div className="flex gap-2 items-center">
             <div className="p-2 bg-mine-shaft-800 rounded-md">
-                <img className="h-7" src={`/Icons/${props.company.toLowerCase()}.png`} alt="" />
+                <img className="h-7" src={`/Icons/${companyName}.png`} alt="" onError={(e: any) => {e.currentTarget.src = "/Icons/default.png";}}/>
             </div>
             <div className="flex flex-col gap-1">
                 <div className="font-semibold">{props.jobTitle}</div>

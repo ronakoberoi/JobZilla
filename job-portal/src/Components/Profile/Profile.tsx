@@ -26,7 +26,7 @@ const Profile = ()=>{
         <div className="relative">
             <img className="rounded-t-2xl w-400 h-40" src="/Profile/banner.jpg" alt="" />
             <div ref={ref} className="absolute flex items-center justify-center -bottom-1/3 left-3">
-            <Avatar className="!w-48 !h-48 border-mine-shaft-950 border-8 rounded-full" src={profile.picture ? `data:image/jpeg;base64,${profile.picture}`:"/Avatar.png"} alt="" />
+            <Avatar className="!w-48 !h-48 border-mine-shaft-950 border-8 rounded-full" src={profile.picture ? `data:image/jpeg;base64,${profile.picture}`:"/avatar.png"} alt="" />
             {hovered && <Overlay className="!rounded-full" color="#000" backgroundOpacity={0.70} />}
             {hovered && <IconEdit className="absolute z-[300] !w-12 !h-12" />}
             {hovered && <FileInput onChange={handleFileChange} className="absolute [&_*]:!rounded-full z-[301] [&_*]:!h-full !h-full w-full" 
